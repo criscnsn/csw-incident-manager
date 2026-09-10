@@ -1,6 +1,9 @@
 ### Compiled Java Binaries ###
 *.class
 
+### Maven ###
+target/
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
