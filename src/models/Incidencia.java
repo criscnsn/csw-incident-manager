@@ -47,12 +47,5 @@ public class Incidencia {
         return estadoActual;
     }
 
-    //El estado cicla entre Pendiente → En proceso → Resuelta
-    public void changeState(){
-        if(estadoActual == EstadoIncidencia.PENDIENTE){
-            estadoActual = EstadoIncidencia.EN_PROCESO;
-        }else if(estadoActual == EstadoIncidencia.EN_PROCESO){
-            estadoActual = EstadoIncidencia.RESUELTA;
-        }
-    }
+    public void setEstadoActual(EstadoIncidencia estadoActual) {this.estadoActual = estadoActual;}
 }
