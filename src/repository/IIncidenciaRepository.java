@@ -2,7 +2,7 @@ package repository;
 
 import java.util.List;
 
-public interface IncidenciaRepository <T>{
+public interface IIncidenciaRepository<T>{
     // CRUD
     T save(T t);
 
