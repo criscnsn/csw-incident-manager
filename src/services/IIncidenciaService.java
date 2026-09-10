@@ -3,6 +3,7 @@ package services;
 import models.EstadoIncidencia;
 import models.Incidencia;
 import models.PrioridadIncidencia;
+
 import java.util.List;
 
 public interface IIncidenciaService {

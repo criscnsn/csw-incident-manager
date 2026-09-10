@@ -13,15 +13,14 @@ public class Incidencia {
             String equipoAfectado,
             String ubicacionArea,
             String descripcionFalla,
-            PrioridadIncidencia prioridad,
-            EstadoIncidencia estadoActual
+            PrioridadIncidencia prioridad
     ) {
         this.identificador = identificador;
         this.equipoAfectado = equipoAfectado;
         this.ubicacionArea = ubicacionArea;
         this.descripcionFalla = descripcionFalla;
         this.prioridad = prioridad;
-        this.estadoActual = estadoActual;
+        this.estadoActual = EstadoIncidencia.PENDIENTE;
     }
 
     public String getIdentificador() {
@@ -48,7 +47,12 @@ public class Incidencia {
         return estadoActual;
     }
 
-    public void setEstadoActual(EstadoIncidencia nuevoEstado) {
-        this.estadoActual = nuevoEstado;
+    //El estado cicla entre Pendiente → En proceso → Resuelta
+    public void changeState(){
+        if(estadoActual == EstadoIncidencia.PENDIENTE){
+            estadoActual = EstadoIncidencia.EN_PROCESO;
+        }else if(estadoActual == EstadoIncidencia.EN_PROCESO){
+            estadoActual = EstadoIncidencia.RESUELTA;
+        }
     }
 }
