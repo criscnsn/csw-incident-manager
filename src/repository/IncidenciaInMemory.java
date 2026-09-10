@@ -31,7 +31,7 @@ public class IncidenciaInMemory implements IIncidenciaRepository<Incidencia> {
     }
 
     @Override
-    public Incidencia findById(int id) {
+    public Incidencia findById(String id) {
         for (Incidencia inc : incidencias) {
             if(inc.getIdentificador().equals(id)){
                 return inc;
@@ -41,12 +41,13 @@ public class IncidenciaInMemory implements IIncidenciaRepository<Incidencia> {
     }
 
     @Override
-    public void deleteById(int id) {
-
+    public void deleteById(String id) {
+        Incidencia inc = findById(id);
+        incidencias.remove(inc);
     }
 
     @Override
-    public boolean existsById(int id) {
-        return false;
+    public boolean existsById(String id) {
+        return findById(id) != null;
     }
 }

@@ -7,8 +7,8 @@ public interface IIncidenciaRepository<T>{
     T save(T t);
 
     List<T> ListAll();
-    T findById(int id);
+    T findById(String id);
 
-    void deleteById(int id);
-    boolean existsById(int id);
+    void deleteById(String id);
+    boolean existsById(String id);
 }
