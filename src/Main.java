@@ -23,7 +23,7 @@ public class Main {
         IIncidenciaService incidenciaService = new IncidenciaService(buscarIncidenciaPorId, cambiarEstadoIncidencia, listarIncidencias, registrarIncidencia);
 
         //Falta implementar la interfaz IView
-        IView view;
-        view.show();
+//        IView view;
+//        view.show();
     }
 }
