@@ -8,8 +8,7 @@ import services.usecases.CambiarEstadoIncidencia;
 import services.usecases.ListarIncidencias;
 import services.usecases.RegistrarIncidencia;
 import ui.IView;
-
-import javax.swing.text.View;
+import ui.JavaFxView;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,8 +21,7 @@ public class Main {
 
         IIncidenciaService incidenciaService = new IncidenciaService(buscarIncidenciaPorId, cambiarEstadoIncidencia, listarIncidencias, registrarIncidencia);
 
-        //Falta implementar la interfaz IView
-//        IView view;
-//        view.show();
+        IView view = new JavaFxView(incidenciaService);
+        view.show();
     }
 }
