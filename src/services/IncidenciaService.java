@@ -42,7 +42,7 @@ public class IncidenciaService implements IIncidenciaService{
 
     @Override
     public Incidencia buscarIncidenciaPorIdentificador(String identificadorIncidencia) {
-        return null;
+        return buscarIncidenciaPorId.ejecutar(identificadorIncidencia);
     }
 
     @Override
