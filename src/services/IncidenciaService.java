@@ -1,5 +1,6 @@
 package services;
 
+import java.util.List;
 import models.EstadoIncidencia;
 import models.Incidencia;
 import models.PrioridadIncidencia;
@@ -7,8 +8,6 @@ import services.usecases.BuscarIncidenciaPorId;
 import services.usecases.CambiarEstadoIncidencia;
 import services.usecases.ListarIncidencias;
 import services.usecases.RegistrarIncidencia;
-
-import java.util.List;
 
 //Clase encargada de gestionar las acciones del sistema
 public class IncidenciaService implements IIncidenciaService{
@@ -47,6 +46,6 @@ public class IncidenciaService implements IIncidenciaService{
 
     @Override
     public Incidencia cambiarEstadoIncidencia(String identificadorIncidencia, EstadoIncidencia nuevoEstado) {
-        return null;
+        return cambiarEstadoIncidencia.ejecutar(identificadorIncidencia, nuevoEstado);
     }
 }
