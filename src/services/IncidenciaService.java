@@ -1,4 +1,4 @@
 package services;
 
-public class IncidenciaService {
+public class IncidenciaService implements IIncidenciaService{
 }
