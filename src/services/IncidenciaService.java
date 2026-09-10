@@ -37,7 +37,7 @@ public class IncidenciaService implements IIncidenciaService{
 
     @Override
     public List<Incidencia> listarIncidencias() {
-        return List.of();
+        return this.listarIncidencias.ejecutar();
     }
 
     @Override

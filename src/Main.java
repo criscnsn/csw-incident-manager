@@ -13,7 +13,7 @@ import ui.JavaFxView;
 public class Main {
     public static void main(String[] args) {
         IIncidenciaRepository<Incidencia> incidenciaRepository = new IncidenciaInMemory();
-
+        //conf
         BuscarIncidenciaPorId buscarIncidenciaPorId = new BuscarIncidenciaPorId(incidenciaRepository);
         CambiarEstadoIncidencia cambiarEstadoIncidencia = new CambiarEstadoIncidencia(incidenciaRepository);
         ListarIncidencias listarIncidencias = new ListarIncidencias(incidenciaRepository);
