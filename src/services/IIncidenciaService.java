@@ -6,7 +6,6 @@ import models.PrioridadIncidencia;
 import java.util.List;
 
 public interface IIncidenciaService {
-
     // Dani
     Incidencia registrarIncidencia(
             String equipoAfectado,
