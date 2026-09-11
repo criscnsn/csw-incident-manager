@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ui.IncidenciasController"
+            stylesheets="@styles.css"
+            styleClass="contenedor-raiz"
+            prefWidth="1050.0"
+            prefHeight="640.0">
+
+
+    <!-- PANEL LATERAL IZQUIERDO: REGISTRAR INCIDENCIA (Trabajo de Dani) -->
+    <left>
+        <VBox styleClass="panel-formulario" spacing="10.0">
+            <Label text="Registrar Nueva Incidencia" styleClass="titulo-seccion" />
+
+            <VBox spacing="4.0">
+                <Label text="Equipo o elemento afectado:" styleClass="etiqueta-campo" />
+                <TextField fx:id="campoEquipo" promptText="Ej. Computadora Lab 1" styleClass="campo-texto" />
+            </VBox>
+
+            <VBox spacing="4.0">
+                <Label text="Ubicación o área:" styleClass="etiqueta-campo" />
+                <TextField fx:id="campoUbicacion" promptText="Ej. Laboratorio de Cómputo" styleClass="campo-texto" />
+            </VBox>
+
+            <VBox spacing="4.0">
+                <Label text="Descripción breve del problema:" styleClass="etiqueta-campo" />
+                <TextArea fx:id="campoDescripcion" promptText="Describe la falla presentada" prefRowCount="3" wrapText="true" styleClass="campo-texto" />
+            </VBox>
+
+            <VBox spacing="4.0">
+                <Label text="Prioridad:" styleClass="etiqueta-campo" />
+                <ComboBox fx:id="comboPrioridad" maxWidth="Infinity" promptText="Seleccionar prioridad" />
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <Button fx:id="botonRegistrar" text="Registrar Incidencia" maxWidth="Infinity" onAction="#handleRegistrar" styleClass="boton-primario" />
+        </VBox>
+    </left>
+
+    <!-- PANEL CENTRAL: LISTADO (Tu trabajo) + BÚSQUEDA (Gael) + CAMBIO DE ESTADO (Gervi) -->
+    <center>
+        <VBox styleClass="panel-centro" spacing="12.0">
+
+            <!-- BARRA SUPERIOR: BUSCAR INCIDENCIA POR ID (Trabajo de Gael) -->
+            <HBox spacing="8.0" alignment="CENTER_LEFT" styleClass="barra-herramientas">
+                <Label text="Buscar por ID:" styleClass="etiqueta-campo" />
+                <TextField fx:id="campoBuscarId" promptText="Ej. INC-001" prefWidth="180.0" styleClass="campo-texto" />
+                <Button fx:id="botonBuscar" text="Buscar" onAction="#handleBuscar" styleClass="boton-primario" />
+                <Button fx:id="botonVerTodas" text="Ver todas" onAction="#handleVerTodas" styleClass="boton-secundario" />
+            </HBox>
+
+            <!-- TABLA DE INCIDENCIAS (Tu trabajo: ListarIncidencias) -->
+            <TableView fx:id="tablaIncidencias" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="columnaId" text="ID" prefWidth="85.0" />
+                    <TableColumn fx:id="columnaEquipo" text="Equipo" prefWidth="140.0" />
+                    <TableColumn fx:id="columnaUbicacion" text="Ubicación" prefWidth="140.0" />
+                    <TableColumn fx:id="columnaDescripcion" text="Descripción" prefWidth="200.0" />
+                    <TableColumn fx:id="columnaPrioridad" text="Prioridad" prefWidth="85.0" />
+                    <TableColumn fx:id="columnaEstado" text="Estado" prefWidth="95.0" />
+                </columns>
+            </TableView>
+
+            <!-- BARRA INFERIOR: CAMBIAR ESTADO (Trabajo de Gervi) -->
+            <HBox spacing="10.0" alignment="CENTER_LEFT" styleClass="barra-herramientas">
+                <Label text="Cambiar estado de seleccionada:" styleClass="etiqueta-campo" />
+                <ComboBox fx:id="comboNuevoEstado" prefWidth="150.0" promptText="Nuevo estado" />
+                <Button fx:id="botonCambiarEstado" text="Aplicar Cambio" onAction="#handleCambiarEstado" styleClass="boton-primario" />
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <Button fx:id="botonRecargar" text="Actualizar Lista" onAction="#handleVerTodas" styleClass="boton-secundario" />
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
