@@ -19,7 +19,10 @@ public class BuscarIncidenciaPorId {
             throw new IncidenciaNoEncontradaException("ID vacia o nula");
         }
         String idAux = id.replaceAll("[ \\s]", "");
-        Incidencia incidencia = Validaciones.validarId(idAux) ? null : incidenciaRepository.findById(idAux);
+        /**
+         * El Operador elvis estaba al reves, mandaba errores si se ponia un id correcto
+         * */
+        Incidencia incidencia = Validaciones.validarId(idAux) ? incidenciaRepository.findById(idAux) : null;
         if(incidencia == null){
             throw new IncidenciaNoEncontradaException("ID no encontrado " + id);
         }
