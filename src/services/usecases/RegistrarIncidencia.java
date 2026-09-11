@@ -2,17 +2,17 @@ package services.usecases;
 
 import models.Incidencia;
 import models.PrioridadIncidencia;
-import repository.IIncidenciaRepository;
 import services.usecases.exceptions.DatosIncidenciaInvalidosException;
+import storage.IIncidenciaStorage;
 
 public class RegistrarIncidencia {
 
-    private final IIncidenciaRepository<Incidencia> incidenciaRepository;
+    private final IIncidenciaStorage incidenciaStorage;
 
     public RegistrarIncidencia(
-            final IIncidenciaRepository<Incidencia> incidenciaRepository
+            final IIncidenciaStorage incidenciaStorage
     ) {
-        this.incidenciaRepository = incidenciaRepository;
+        this.incidenciaStorage = incidenciaStorage;
     }
 
     public Incidencia ejecutar(
@@ -38,7 +38,7 @@ public class RegistrarIncidencia {
                 prioridad
         );
 
-        return this.incidenciaRepository.save(incidencia);
+        return this.incidenciaStorage.save(incidencia);
     }
 
     private void validarDatos(
@@ -74,7 +74,7 @@ public class RegistrarIncidencia {
 
     private String generarIdentificador() {
         // Los identificadores siguen el formato INC-001, INC-002, etc.
-        int numeroIncidencia = incidenciaRepository.listAll().size() + 1;
+        int numeroIncidencia = this.incidenciaStorage.listAll().size() + 1;
 
         String identificador = String.format(
                 "INC-%03d",
@@ -82,7 +82,7 @@ public class RegistrarIncidencia {
         );
 
         // Evita registrar dos incidencias con el mismo identificador.
-        while (incidenciaRepository.existsById(identificador)) {
+        while (this.incidenciaStorage.existsById(identificador)) {
             numeroIncidencia++;
 
             identificador = String.format(

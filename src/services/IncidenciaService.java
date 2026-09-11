@@ -4,35 +4,38 @@ import java.util.List;
 import models.EstadoIncidencia;
 import models.Incidencia;
 import models.PrioridadIncidencia;
-import repository.IIncidenciaRepository;
 import services.usecases.BuscarIncidenciaPorId;
 import services.usecases.CambiarEstadoIncidencia;
 import services.usecases.ListarIncidencias;
 import services.usecases.RegistrarIncidencia;
+import storage.IIncidenciaStorage;
 
-//Clase encargada de gestionar las acciones del sistema
 public class IncidenciaService implements IIncidenciaService {
     private final BuscarIncidenciaPorId buscarIncidenciaPorId;
     private final CambiarEstadoIncidencia cambiarEstadoIncidencia;
     private final ListarIncidencias listarIncidencias;
     private final RegistrarIncidencia registrarIncidencia;
 
-    public IncidenciaService(final IIncidenciaRepository<Incidencia> repository) {
-        this.buscarIncidenciaPorId = new BuscarIncidenciaPorId(repository);
-        this.cambiarEstadoIncidencia = new CambiarEstadoIncidencia(repository);
-        this.listarIncidencias = new ListarIncidencias(repository);
-        this.registrarIncidencia = new RegistrarIncidencia(repository);
+    public IncidenciaService(final IIncidenciaStorage storage) {
+        this.buscarIncidenciaPorId = new BuscarIncidenciaPorId(storage);
+        this.cambiarEstadoIncidencia = new CambiarEstadoIncidencia(storage);
+        this.listarIncidencias = new ListarIncidencias(storage);
+        this.registrarIncidencia = new RegistrarIncidencia(storage);
     }
 
-
     @Override
-    public Incidencia registrarIncidencia(String equipoAfectado, String ubicacionArea, String descripcionFalla, PrioridadIncidencia prioridad) {
-            return registrarIncidencia.ejecutar(
-            equipoAfectado,
-            ubicacionArea,
-            descripcionFalla,
-            prioridad
-    );
+    public Incidencia registrarIncidencia(
+            final String equipoAfectado,
+            final String ubicacionArea,
+            final String descripcionFalla,
+            final PrioridadIncidencia prioridad
+    ) {
+        return this.registrarIncidencia.ejecutar(
+                equipoAfectado,
+                ubicacionArea,
+                descripcionFalla,
+                prioridad
+        );
     }
 
     @Override
@@ -41,13 +44,13 @@ public class IncidenciaService implements IIncidenciaService {
     }
 
     @Override
-    public Incidencia buscarIncidenciaPorIdentificador(String identificadorIncidencia) {
-        return buscarIncidenciaPorId.ejecutar(identificadorIncidencia);
+    public Incidencia buscarIncidenciaPorIdentificador(final String identificadorIncidencia) {
+        return this.buscarIncidenciaPorId.ejecutar(identificadorIncidencia);
     }
 
     @Override
-    public Incidencia cambiarEstadoIncidencia(String identificadorIncidencia, EstadoIncidencia nuevoEstado) {
-        Incidencia incidenciaEncontrada = buscarIncidenciaPorId.ejecutar(identificadorIncidencia);
-        return cambiarEstadoIncidencia.ejecutar(incidenciaEncontrada, nuevoEstado);
+    public Incidencia cambiarEstadoIncidencia(final String identificadorIncidencia, final EstadoIncidencia nuevoEstado) {
+        final Incidencia incidenciaEncontrada = this.buscarIncidenciaPorId.ejecutar(identificadorIncidencia);
+        return this.cambiarEstadoIncidencia.ejecutar(incidenciaEncontrada, nuevoEstado);
     }
 }

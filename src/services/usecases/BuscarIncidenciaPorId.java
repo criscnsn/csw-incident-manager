@@ -1,16 +1,14 @@
 package services.usecases;
 
 import models.Incidencia;
-import repository.IIncidenciaRepository;
 import services.usecases.exceptions.IncidenciaNoEncontradaException;
-
-
+import storage.IIncidenciaStorage;
 
 public class BuscarIncidenciaPorId {
-    private final IIncidenciaRepository<Incidencia> incidenciaRepository;
+    private final IIncidenciaStorage incidenciaStorage;
 
-    public BuscarIncidenciaPorId(final IIncidenciaRepository<Incidencia> incidenciaRepository) {
-        this.incidenciaRepository = incidenciaRepository;
+    public BuscarIncidenciaPorId(final IIncidenciaStorage incidenciaStorage) {
+        this.incidenciaStorage = incidenciaStorage;
     }
 
     public Incidencia ejecutar(final String identificador) {
@@ -20,7 +18,7 @@ public class BuscarIncidenciaPorId {
 
         final String idNormalizado = identificador.replaceAll("[ \\s]", "");
         final Incidencia incidencia = validarId(idNormalizado)
-                ? this.incidenciaRepository.findById(idNormalizado)
+                ? this.incidenciaStorage.findById(idNormalizado)
                 : null;
 
         if (incidencia == null) {

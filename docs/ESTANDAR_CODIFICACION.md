@@ -62,7 +62,7 @@ Ejemplo de organización:
 ```text
 src/
 ├── models/
-├── repository/
+├── storage/
 ├── services/
 ├── ui/
 └── Main.java

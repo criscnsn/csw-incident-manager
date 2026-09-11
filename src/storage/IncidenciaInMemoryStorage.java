@@ -1,15 +1,15 @@
-package repository;
+package storage;
 
 import models.Incidencia;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class IncidenciaInMemory implements IIncidenciaRepository<Incidencia> {
+public class IncidenciaInMemoryStorage implements IIncidenciaStorage {
 
     private final List<Incidencia> incidencias;
 
-    public IncidenciaInMemory() {
+    public IncidenciaInMemoryStorage() {
         this.incidencias = new ArrayList<>();
     }
 

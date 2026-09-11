@@ -2,15 +2,15 @@ package services.usecases;
 
 import models.EstadoIncidencia;
 import models.Incidencia;
-import repository.IIncidenciaRepository;
 import services.usecases.exceptions.IncidenciaNoEncontradaException;
 import services.usecases.exceptions.TransicionEstadoInvalidaException;
+import storage.IIncidenciaStorage;
 
 public class CambiarEstadoIncidencia {
-    private final IIncidenciaRepository<Incidencia> incidenciaRepository;
+    private final IIncidenciaStorage incidenciaStorage;
 
-    public CambiarEstadoIncidencia(final IIncidenciaRepository<Incidencia> incidenciaRepository) {
-        this.incidenciaRepository = incidenciaRepository;
+    public CambiarEstadoIncidencia(final IIncidenciaStorage incidenciaStorage) {
+        this.incidenciaStorage = incidenciaStorage;
     }
 
     public Incidencia ejecutar(final Incidencia incidencia, final EstadoIncidencia nuevoEstado) {
@@ -32,6 +32,6 @@ public class CambiarEstadoIncidencia {
         }
 
         incidencia.setEstadoActual(nuevoEstado);
-        return this.incidenciaRepository.save(incidencia);
+        return this.incidenciaStorage.save(incidencia);
     }
 }
