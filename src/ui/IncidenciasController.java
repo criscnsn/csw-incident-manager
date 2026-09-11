@@ -16,6 +16,7 @@ import models.PrioridadIncidencia;
 import services.IIncidenciaService;
 import services.usecases.exceptions.DatosIncidenciaInvalidosException;
 import services.usecases.exceptions.IncidenciaNoEncontradaException;
+import services.usecases.exceptions.TransicionEstadoInvalidaException;
 
 import java.net.URL;
 import java.util.List;
@@ -199,23 +200,28 @@ public class IncidenciasController implements Initializable {
             return;
         }
 
-        final Incidencia actualizada = this.incidenciaService.cambiarEstadoIncidencia(
-                seleccionada.getIdentificador(),
-                nuevoEstado
-        );
-
-        if (actualizada != null) {
+        try {
+            final Incidencia actualizada = this.incidenciaService.cambiarEstadoIncidencia(
+                    seleccionada.getIdentificador(),
+                    nuevoEstado
+            );
             cargarIncidencias();
             mostrarAlerta(
                     Alert.AlertType.INFORMATION,
                     "Estado Actualizado",
                     "La incidencia " + seleccionada.getIdentificador() + " ahora está: " + nuevoEstado
             );
-        } else {
+        } catch (TransicionEstadoInvalidaException excepcionTransicion) {
             mostrarAlerta(
                     Alert.AlertType.ERROR,
                     "Transición No Permitida",
-                    "No fue posible cambiar el estado de la incidencia seleccionada."
+                    excepcionTransicion.getMessage()
+            );
+        } catch (IncidenciaNoEncontradaException excepcionNoEncontrada) {
+            mostrarAlerta(
+                    Alert.AlertType.WARNING,
+                    "Error de Búsqueda",
+                    excepcionNoEncontrada.getMessage()
             );
         }
     }

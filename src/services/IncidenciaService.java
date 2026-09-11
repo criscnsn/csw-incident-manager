@@ -51,6 +51,7 @@ public class IncidenciaService implements IIncidenciaService{
 
     @Override
     public Incidencia cambiarEstadoIncidencia(String identificadorIncidencia, EstadoIncidencia nuevoEstado) {
-        return cambiarEstadoIncidencia.ejecutar(identificadorIncidencia, nuevoEstado);
+        Incidencia incidenciaEncontrada = buscarIncidenciaPorId.ejecutar(identificadorIncidencia);
+        return cambiarEstadoIncidencia.ejecutar(incidenciaEncontrada, nuevoEstado);
     }
 }
