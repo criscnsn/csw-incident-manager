@@ -4,7 +4,6 @@ import models.Incidencia;
 import repository.IIncidenciaRepository;
 import services.usecases.exceptions.IncidenciaNoEncontradaException;
 
-import static services.usecases.Validaciones.validarId;
 
 
 public class BuscarIncidenciaPorId {
@@ -22,25 +21,13 @@ public class BuscarIncidenciaPorId {
         /**
          * El Operador elvis estaba al reves, mandaba errores si se ponia un id correcto
          * */
-        Incidencia incidencia = Validaciones.validarId(idAux) ? incidenciaRepository.findById(idAux) : null;
+        Incidencia incidencia = validarId(idAux) ? incidenciaRepository.findById(idAux) : null;
         if(incidencia == null){
             throw new IncidenciaNoEncontradaException("ID no encontrado " + id);
         }
         return incidencia;
     }
-
-
-
-    static void main() {
-        String id = "INC-0045";
-        BuscarIncidenciaPorId buscarIncidenciaPorId = new BuscarIncidenciaPorId(null);
-        Incidencia inc;
-        try {
-            inc = buscarIncidenciaPorId.ejecutar(id);
-            System.out.println(inc);
-        } catch (IncidenciaNoEncontradaException e){
-            System.out.println(e.getMessage());
-        }
-
+    private static boolean validarId(String id){
+        return id.matches(  "^INC-\\d{3,}?$");
     }
 }
