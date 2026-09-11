@@ -92,7 +92,7 @@ public class IncidenciasController implements Initializable {
     }
 
     private void configurarColumnas() {
-        this.tablaIncidencias.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        this.tablaIncidencias.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
 
         this.columnaId.setCellValueFactory(new PropertyValueFactory<>("identificador"));
         this.columnaEquipo.setCellValueFactory(new PropertyValueFactory<>("equipoAfectado"));

@@ -7,27 +7,30 @@ import services.usecases.exceptions.IncidenciaNoEncontradaException;
 
 
 public class BuscarIncidenciaPorId {
-//    búsqueda + manejo de "no encontrado"
     private final IIncidenciaRepository<Incidencia> incidenciaRepository;
-    public BuscarIncidenciaPorId(IIncidenciaRepository<Incidencia> incidenciaRepository){
+
+    public BuscarIncidenciaPorId(final IIncidenciaRepository<Incidencia> incidenciaRepository) {
         this.incidenciaRepository = incidenciaRepository;
     }
 
-    public Incidencia ejecutar(String id){
-        if(id == null || id.isBlank()) {
-            throw new IncidenciaNoEncontradaException("ID vacia o nula");
+    public Incidencia ejecutar(final String identificador) {
+        if (identificador == null || identificador.isBlank()) {
+            throw new IncidenciaNoEncontradaException("Identificador vacío o nulo.");
         }
-        String idAux = id.replaceAll("[ \\s]", "");
-        /**
-         * El Operador elvis estaba al reves, mandaba errores si se ponia un id correcto
-         * */
-        Incidencia incidencia = validarId(idAux) ? incidenciaRepository.findById(idAux) : null;
-        if(incidencia == null){
-            throw new IncidenciaNoEncontradaException("ID no encontrado " + id);
+
+        final String idNormalizado = identificador.replaceAll("[ \\s]", "");
+        final Incidencia incidencia = validarId(idNormalizado)
+                ? this.incidenciaRepository.findById(idNormalizado)
+                : null;
+
+        if (incidencia == null) {
+            throw new IncidenciaNoEncontradaException("No se encontró la incidencia con identificador: " + identificador);
         }
+
         return incidencia;
     }
-    private static boolean validarId(String id){
-        return id.matches(  "^INC-\\d{3,}?$");
+
+    private static boolean validarId(final String identificador) {
+        return identificador.matches("^INC-\\d{3,}?$");
     }
 }

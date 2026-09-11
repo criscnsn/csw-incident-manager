@@ -14,13 +14,11 @@ public class ListarIncidencias {
         this.incidenciaRepository = incidenciaRepository;
     }
     /**
-     * Si hay incidencias registradas, devuelve una vista no modificable (Collections unmodifiableList)
-     * Si por alguna razón el repositorio fuera null, devuelve una Lista vacía
-     *
-     * NOTA: Si es muy obvio, pues borren esto PLOx
-     * */
+     * Devuelve una lista de solo lectura con todas las incidencias registradas.
+     * Si no hay incidencias o el repositorio devuelve null, retorna una lista vacía inmutable.
+     */
     public List<Incidencia> ejecutar() {
-        final List<Incidencia> incidencias = this.incidenciaRepository.ListAll();
+        final List<Incidencia> incidencias = this.incidenciaRepository.listAll();
         return (incidencias != null) ? Collections.unmodifiableList(incidencias) : List.of();
     }
 }

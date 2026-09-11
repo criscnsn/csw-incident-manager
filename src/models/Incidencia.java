@@ -9,11 +9,11 @@ public class Incidencia {
     private EstadoIncidencia estadoActual;
 
     public Incidencia(
-            String identificador,
-            String equipoAfectado,
-            String ubicacionArea,
-            String descripcionFalla,
-            PrioridadIncidencia prioridad
+            final String identificador,
+            final String equipoAfectado,
+            final String ubicacionArea,
+            final String descripcionFalla,
+            final PrioridadIncidencia prioridad
     ) {
         this.identificador = identificador;
         this.equipoAfectado = equipoAfectado;
@@ -47,5 +47,7 @@ public class Incidencia {
         return estadoActual;
     }
 
-    public void setEstadoActual(EstadoIncidencia estadoActual) {this.estadoActual = estadoActual;}
+    public void setEstadoActual(final EstadoIncidencia estadoActual) {
+        this.estadoActual = estadoActual;
+    }
 }

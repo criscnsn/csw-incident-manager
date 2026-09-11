@@ -7,7 +7,6 @@ import models.PrioridadIncidencia;
 import java.util.List;
 
 public interface IIncidenciaService {
-    // Dani
     Incidencia registrarIncidencia(
             String equipoAfectado,
             String ubicacionArea,
@@ -15,16 +14,12 @@ public interface IIncidenciaService {
             PrioridadIncidencia prioridad
     );
 
-    // Cris
     List<Incidencia> listarIncidencias();
 
-    // Gael
     Incidencia buscarIncidenciaPorIdentificador(String identificadorIncidencia);
 
-    // Diego
     Incidencia cambiarEstadoIncidencia(
             String identificadorIncidencia,
             EstadoIncidencia nuevoEstado
     );
-    
 }

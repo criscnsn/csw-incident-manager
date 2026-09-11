@@ -10,16 +10,16 @@ public class RegistrarIncidencia {
     private final IIncidenciaRepository<Incidencia> incidenciaRepository;
 
     public RegistrarIncidencia(
-            IIncidenciaRepository<Incidencia> incidenciaRepository
+            final IIncidenciaRepository<Incidencia> incidenciaRepository
     ) {
         this.incidenciaRepository = incidenciaRepository;
     }
 
     public Incidencia ejecutar(
-            String equipoAfectado,
-            String ubicacionArea,
-            String descripcionFalla,
-            PrioridadIncidencia prioridad
+            final String equipoAfectado,
+            final String ubicacionArea,
+            final String descripcionFalla,
+            final PrioridadIncidencia prioridad
     ) {
         validarDatos(
                 equipoAfectado,
@@ -38,14 +38,14 @@ public class RegistrarIncidencia {
                 prioridad
         );
 
-        return incidenciaRepository.save(incidencia);
+        return this.incidenciaRepository.save(incidencia);
     }
 
     private void validarDatos(
-            String equipoAfectado,
-            String ubicacionArea,
-            String descripcionFalla,
-            PrioridadIncidencia prioridad
+            final String equipoAfectado,
+            final String ubicacionArea,
+            final String descripcionFalla,
+            final PrioridadIncidencia prioridad
     ) {
         if (equipoAfectado == null || equipoAfectado.isBlank()) {
             throw new DatosIncidenciaInvalidosException(
@@ -74,7 +74,7 @@ public class RegistrarIncidencia {
 
     private String generarIdentificador() {
         // Los identificadores siguen el formato INC-001, INC-002, etc.
-        int numeroIncidencia = incidenciaRepository.ListAll().size() + 1;
+        int numeroIncidencia = incidenciaRepository.listAll().size() + 1;
 
         String identificador = String.format(
                 "INC-%03d",

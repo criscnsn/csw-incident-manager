@@ -7,18 +7,17 @@ import java.util.List;
 
 public class IncidenciaInMemory implements IIncidenciaRepository<Incidencia> {
 
-    List<Incidencia> incidencias;
+    private final List<Incidencia> incidencias;
 
-    public IncidenciaInMemory(){
-        incidencias = new ArrayList<>();
+    public IncidenciaInMemory() {
+        this.incidencias = new ArrayList<>();
     }
 
-
     @Override
-    public Incidencia save(Incidencia incidencia) {
+    public Incidencia save(final Incidencia incidencia) {
         if (incidencia != null) {
-            if (!incidencias.contains(incidencia)) {
-                incidencias.add(incidencia);
+            if (!this.incidencias.contains(incidencia)) {
+                this.incidencias.add(incidencia);
             }
             return incidencia;
         }
@@ -26,14 +25,14 @@ public class IncidenciaInMemory implements IIncidenciaRepository<Incidencia> {
     }
 
     @Override
-    public List<Incidencia> ListAll() {
-        return incidencias;
+    public List<Incidencia> listAll() {
+        return this.incidencias;
     }
 
     @Override
-    public Incidencia findById(String id) {
-        for (Incidencia inc : incidencias) {
-            if(inc.getIdentificador().equals(id)){
+    public Incidencia findById(final String identificador) {
+        for (final Incidencia inc : this.incidencias) {
+            if (inc.getIdentificador().equals(identificador)) {
                 return inc;
             }
         }
@@ -41,13 +40,13 @@ public class IncidenciaInMemory implements IIncidenciaRepository<Incidencia> {
     }
 
     @Override
-    public void deleteById(String id) {
-        Incidencia inc = findById(id);
-        incidencias.remove(inc);
+    public void deleteById(final String identificador) {
+        final Incidencia inc = findById(identificador);
+        this.incidencias.remove(inc);
     }
 
     @Override
-    public boolean existsById(String id) {
-        return findById(id) != null;
+    public boolean existsById(final String identificador) {
+        return findById(identificador) != null;
     }
 }

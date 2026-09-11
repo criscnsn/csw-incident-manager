@@ -2,7 +2,7 @@ package services.usecases.exceptions;
 
 public class DatosIncidenciaInvalidosException extends RuntimeException {
 
-    public DatosIncidenciaInvalidosException(String message) {
+    public DatosIncidenciaInvalidosException(final String message) {
         super(message);
     }
     
