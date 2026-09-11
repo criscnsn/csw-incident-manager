@@ -29,6 +29,6 @@ public class BuscarIncidenciaPorId {
     }
 
     private static boolean validarId(final String identificador) {
-        return identificador.matches("^INC-\\d{3,}?$");
+        return identificador.matches("^INC-\\d{3}?$");
     }
 }
