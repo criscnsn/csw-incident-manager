@@ -31,7 +31,12 @@ public class IncidenciaService implements IIncidenciaService{
 
     @Override
     public Incidencia registrarIncidencia(String equipoAfectado, String ubicacionArea, String descripcionFalla, PrioridadIncidencia prioridad) {
-            return null;
+            return registrarIncidencia.ejecutar(
+            equipoAfectado,
+            ubicacionArea,
+            descripcionFalla,
+            prioridad
+    );
     }
 
     @Override

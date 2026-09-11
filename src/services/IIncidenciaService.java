@@ -26,4 +26,5 @@ public interface IIncidenciaService {
             String identificadorIncidencia,
             EstadoIncidencia nuevoEstado
     );
+    
 }

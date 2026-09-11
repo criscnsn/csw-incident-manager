@@ -9,4 +9,7 @@ public class RegistrarIncidencia {
     public RegistrarIncidencia(IIncidenciaRepository<Incidencia> incidenciaRepository){
         this.incidenciaRepository = incidenciaRepository;
     }
+
+
+    
 }
