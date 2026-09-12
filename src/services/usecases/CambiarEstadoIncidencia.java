@@ -21,14 +21,11 @@ public class CambiarEstadoIncidencia {
 
         final EstadoIncidencia estadoActual = incidencia.getEstadoActual();
 
-        // Máquina de estados: solo se permite PENDIENTE -> EN_PROCESO -> RESUELTA
-
-        boolean transicionValida = isTransicionValida(
+        final boolean transicionValida = isTransicionValida(
                 incidencia,
                 nuevoEstado,
                 estadoActual
         );
-
 
         if (!transicionValida) {
             throw new TransicionEstadoInvalidaException(estadoActual, nuevoEstado);
@@ -39,14 +36,13 @@ public class CambiarEstadoIncidencia {
     }
 
     private static boolean isTransicionValida(
-            Incidencia incidencia,
-            EstadoIncidencia nuevoEstado,
-            EstadoIncidencia estadoActual
+            final Incidencia incidencia,
+            final EstadoIncidencia nuevoEstado,
+            final EstadoIncidencia estadoActual
     ) {
         final PrioridadIncidencia prioridadActual = incidencia.getPrioridad();
 
-
-        boolean transicionValida;
+        final boolean transicionValida;
         if (prioridadActual == PrioridadIncidencia.ALTA) {
             transicionValida = switch (estadoActual) {
                 case PENDIENTE -> nuevoEstado == EstadoIncidencia.EN_PROCESO;

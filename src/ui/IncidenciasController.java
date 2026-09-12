@@ -211,13 +211,13 @@ public class IncidenciasController implements Initializable {
                     "Estado Actualizado",
                     "La incidencia " + seleccionada.getIdentificador() + " ahora está: " + nuevoEstado
             );
-        } catch (TransicionEstadoInvalidaException excepcionTransicion) {
+        } catch (final TransicionEstadoInvalidaException excepcionTransicion) {
             mostrarAlerta(
                     Alert.AlertType.ERROR,
                     "Transición No Permitida",
                     excepcionTransicion.getMessage()
             );
-        } catch (IncidenciaNoEncontradaException excepcionNoEncontrada) {
+        } catch (final IncidenciaNoEncontradaException excepcionNoEncontrada) {
             mostrarAlerta(
                     Alert.AlertType.WARNING,
                     "Error de Búsqueda",
