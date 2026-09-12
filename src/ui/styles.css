@@ -2,17 +2,6 @@
     -fx-background-color: #f1f5f9;
 }
 
-.titulo-app {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #ffffff;
-}
-
-.subtitulo-app {
-    -fx-font-size: 12px;
-    -fx-text-fill: #94a3b8;
-}
-
 .panel-formulario {
     -fx-background-color: #ffffff;
     -fx-border-color: #e2e8f0;
