@@ -2,6 +2,7 @@ package services.usecases;
 
 import models.EstadoIncidencia;
 import models.Incidencia;
+import models.PrioridadIncidencia;
 import services.usecases.exceptions.IncidenciaNoEncontradaException;
 import services.usecases.exceptions.TransicionEstadoInvalidaException;
 import storage.IIncidenciaStorage;
@@ -21,11 +22,13 @@ public class CambiarEstadoIncidencia {
         final EstadoIncidencia estadoActual = incidencia.getEstadoActual();
 
         // Máquina de estados: solo se permite PENDIENTE -> EN_PROCESO -> RESUELTA
-        final boolean transicionValida = switch (estadoActual) {
-            case PENDIENTE -> nuevoEstado == EstadoIncidencia.EN_PROCESO;
-            case EN_PROCESO -> nuevoEstado == EstadoIncidencia.RESUELTA;
-            case RESUELTA -> false;
-        };
+
+        boolean transicionValida = isTransicionValida(
+                incidencia,
+                nuevoEstado,
+                estadoActual
+        );
+
 
         if (!transicionValida) {
             throw new TransicionEstadoInvalidaException(estadoActual, nuevoEstado);
@@ -33,5 +36,30 @@ public class CambiarEstadoIncidencia {
 
         incidencia.setEstadoActual(nuevoEstado);
         return this.incidenciaStorage.save(incidencia);
+    }
+
+    private static boolean isTransicionValida(
+            Incidencia incidencia,
+            EstadoIncidencia nuevoEstado,
+            EstadoIncidencia estadoActual
+    ) {
+        final PrioridadIncidencia prioridadActual = incidencia.getPrioridad();
+
+
+        boolean transicionValida;
+        if (prioridadActual == PrioridadIncidencia.ALTA) {
+            transicionValida = switch (estadoActual) {
+                case PENDIENTE -> nuevoEstado == EstadoIncidencia.EN_PROCESO;
+                case EN_PROCESO -> nuevoEstado == EstadoIncidencia.RESUELTA;
+                case RESUELTA -> false;
+            };
+        } else {
+            transicionValida = switch (estadoActual) {
+                case PENDIENTE -> nuevoEstado != EstadoIncidencia.PENDIENTE;
+                case EN_PROCESO -> nuevoEstado == EstadoIncidencia.RESUELTA;
+                case RESUELTA -> false;
+            };
+        }
+        return transicionValida;
     }
 }
